@@ -2,25 +2,25 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
 {
     public class ExercismCommandLineInterface : CommandLineInterface
     {
-        private readonly ILogger<ExercismCommandLineInterface> _logger;
-
-        public ExercismCommandLineInterface(ILogger<ExercismCommandLineInterface> logger) : base(GetFileName(), logger) =>
-            _logger = logger;
-
+        public ExercismCommandLineInterface(string fileName) : base(fileName)
+        {
+        }
+        
         public virtual async Task<DirectoryInfo> Download(string id)
         {
             var arguments = GetArguments(id);
 
-            _logger.LogInformation("Executing exercism CLI command for solution {ID}: {Command}", id, arguments);
+            Log.Information("Executing exercism CLI command for solution {ID}: {Command}", id, arguments);
             
             var output = await Run(arguments);
 
-            _logger.LogInformation("Executed exercism CLI command for solution {ID}", id);
+            Log.Information("Executed exercism CLI command for solution {ID}", id);
             
             return new DirectoryInfo(output.Output.Trim());
         }

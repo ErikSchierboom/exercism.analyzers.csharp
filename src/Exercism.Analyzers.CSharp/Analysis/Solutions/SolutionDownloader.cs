@@ -4,24 +4,24 @@ using Exercism.Analyzers.CSharp.Analysis.CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 {
     public class SolutionDownloader
     {
         private readonly ExercismCommandLineInterface _exercismCommandLineInterface;
-        private readonly ILogger<SolutionDownloader> _logger;
-
-        public SolutionDownloader(ExercismCommandLineInterface exercismCommandLineInterface, ILogger<SolutionDownloader> logger) =>
-            (_exercismCommandLineInterface, _logger) = (exercismCommandLineInterface, logger);
+        
+        public SolutionDownloader(ExercismCommandLineInterface exercismCommandLineInterface) =>
+            _exercismCommandLineInterface = exercismCommandLineInterface;
 
         public async Task<DownloadedSolution> Download(string id)
         {
-            _logger.LogInformation("Downloading solution {ID}", id);
+            Log.Information("Downloading solution {ID}", id);
             
             var solutionDirectory = await DownloadToDirectory(id);
             
-            _logger.LogInformation("Downloaded solution {ID} to {SolutionDirectory}", 
+            Log.Information("Downloaded solution {ID} to {SolutionDirectory}", 
                 id, solutionDirectory.FullName);
             
             var solution = await GetSolution(solutionDirectory);

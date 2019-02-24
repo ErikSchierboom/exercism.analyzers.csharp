@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.Threading.Tasks;
 
 namespace Exercism.Analyzers.CSharp
 {
     public static class Program
     {
-        public static void Main(string[] args) =>
-            CreateWebHostBuilder(args).Build().Run();
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static async Task Main(string[] args)
+        {
+            Logging.Configure();
+        }
     }
 }

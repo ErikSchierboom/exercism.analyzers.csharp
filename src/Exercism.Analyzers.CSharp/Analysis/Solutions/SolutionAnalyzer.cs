@@ -8,20 +8,17 @@ using Exercism.Analyzers.CSharp.Analysis.Testing;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 {
     public class SolutionAnalyzer
     {
-        private readonly ILogger<SolutionAnalyzer> _logger;
-
-        public SolutionAnalyzer(ILogger<SolutionAnalyzer> logger) => _logger = logger;
-
         public async Task<AnalyzedSolution> Analyze(CompiledSolution compiledSolution)
         {
             var analyzedSolution = await CreateAnalyzedSolution(compiledSolution);
 
-            _logger.LogInformation("Analysis result for solution {ID}: status {SolutionStatus}, comments {Comments}", 
+            Log.Information("Analysis result for solution {ID}: status {SolutionStatus}, comments {Comments}", 
                 compiledSolution.Solution.Id, analyzedSolution.Status, analyzedSolution.Comments);
 
             return analyzedSolution;
@@ -58,7 +55,7 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
             var diagnostics = await GetDiagnostics(compiledSolution);
             var diagnosticsBySeverity = diagnostics.ToLookup(diagnostic => diagnostic.Severity);
 
-            _logger.LogInformation(
+            Log.Information(
                 "Retrieved diagnostics for solution {ID}: {NumberOfErrors} errors, {NumberOfWarnings} warnings and {NumberOfInformation} information",
                 compiledSolution.Solution.Id,
                 diagnosticsBySeverity[DiagnosticSeverity.Error].Count(),
@@ -81,7 +78,7 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
         {
             var analyzers = AnalyzerFactory.Create(compiledSolution.Solution);
 
-            _logger.LogInformation("Retrieving diagnostics for solution {ID} using analyzers {Analyzers}",
+            Log.Information("Retrieving diagnostics for solution {ID} using analyzers {Analyzers}",
                 compiledSolution.Solution.Id, GetAnalyzerNames(analyzers));
 
             var compilationWithAnalyzers = compiledSolution.Compilation.WithAnalyzers(analyzers);
@@ -90,14 +87,14 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 
         private async Task<bool> CanBeApproved(CompiledSolution compiledSolution)
         {
-            _logger.LogInformation("Checking if solution {ID} can be automatically approved",
+            Log.Information("Checking if solution {ID} can be automatically approved",
                 compiledSolution.Solution.Id);
             
             var approvalAnalyzer = AnalyzerFactory.CreateForApproval(compiledSolution.Solution);
             if (!await approvalAnalyzer.CanBeApproved(compiledSolution.Compilation))
                 return false;
 
-            _logger.LogInformation("Solution {ID} can be automatically approved",
+            Log.Information("Solution {ID} can be automatically approved",
                 compiledSolution.Solution.Id);
 
             return true;

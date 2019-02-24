@@ -1,37 +1,36 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
 {
     public abstract class CommandLineInterface
     {
         private readonly string _fileName;
-        private readonly ILogger _logger;
 
-        protected CommandLineInterface(string fileName, ILogger logger) =>
-            (_fileName, _logger) = (fileName, logger);
+        protected CommandLineInterface(string fileName) => _fileName = fileName;
         
         protected async Task<CommandLineInterfaceResult> Run(string arguments)
         {
             using (var process = new Process {StartInfo = CreateStartInfo(arguments)})
             {
-                _logger.LogInformation("Executing CLI command '{File}' with arguments '{Arguments}'",
+                Log.Information("Executing CLI command '{File}' with arguments '{Arguments}'",
                     process.StartInfo.FileName, process.StartInfo.Arguments);
                 
                 process.Start();
                 process.WaitForExit();
                 
-                _logger.LogInformation("Executed CLI command '{File}' with arguments '{Arguments}'",
+                Log.Information("Executed CLI command '{File}' with arguments '{Arguments}'",
                     process.StartInfo.FileName, process.StartInfo.Arguments);
                 
                 var output = await process.StandardOutput.ReadToEndAsync();
                 var error = await process.StandardError.ReadToEndAsync();
                 
                 if (process.ExitCode == 0)
-                    _logger.LogInformation("Output of executed CLI command: '{Output}'", output);
+                    Log.Information("Output of executed CLI command: '{Output}'", output);
                 else
-                    _logger.LogError("Error output of executed CLI command: '{Error}'", error);
+                    Log.Error("Error output of executed CLI command: '{Error}'", error);
 
                 return new CommandLineInterfaceResult(output, error, process.ExitCode);
             }
