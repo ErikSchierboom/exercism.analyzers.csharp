@@ -7,7 +7,6 @@ using Exercism.Analyzers.CSharp.Analysis.Compiling;
 using Exercism.Analyzers.CSharp.Analysis.Testing;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.Solutions

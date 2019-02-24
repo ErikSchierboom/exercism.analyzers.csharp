@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Shared.ExpressionBodiedMember
 {
     public class ExpressionBodiedMemberTests : SolutionAnalysisTests
     {
-        public ExpressionBodiedMemberTests(WebApplicationFactory<Startup> factory) : base(factory, FakeExercise.Shared)
+        public ExpressionBodiedMemberTests() : base(FakeExercise.Shared)
         {
         }
 

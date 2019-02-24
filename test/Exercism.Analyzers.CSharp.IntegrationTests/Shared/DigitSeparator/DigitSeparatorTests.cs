@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Shared.DigitSeparator
 {
     public class DigitSeparatorTests : SolutionAnalysisTests
     {
-        public DigitSeparatorTests(WebApplicationFactory<Startup> factory) : base(factory, FakeExercise.Shared)
+        public DigitSeparatorTests() : base(FakeExercise.Shared)
         {
         }
 

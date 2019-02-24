@@ -1,25 +1,17 @@
-using System.Net.Http;
+using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.Analysis;
 using Exercism.Analyzers.CSharp.Analysis.Solutions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 {
-    public abstract class SolutionAnalysisTests : IClassFixture<WebApplicationFactory<Startup>>
+    public abstract class SolutionAnalysisTests
     {
-        private readonly HttpClient _httpClient;
         private readonly FakeExercise _fakeExercise;
-        private readonly FakeExercismCommandLineInterface _fakeExercismCommandLineInterface;
 
-        protected SolutionAnalysisTests(WebApplicationFactory<Startup> factory, FakeExercise fakeExercise)
-        {
-            _fakeExercise = fakeExercise;
-            _fakeExercismCommandLineInterface = new FakeExercismCommandLineInterface();
-            _httpClient = AnalysisTestsHttpClientFactory.Create(factory, _fakeExercismCommandLineInterface);
-        }
+        protected SolutionAnalysisTests(FakeExercise fakeExercise) => _fakeExercise = fakeExercise;
 
         protected async Task ApprovedWithoutComments([CallerMemberName]string testMethodName = "") =>
             await AnalysisResultWithoutComments(SolutionStatus.Approved, testMethodName);
@@ -63,22 +55,16 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
         private async Task<AnalysisResult> GetAnalysisResult([CallerMemberName]string testMethodName = "")
         {
             var fakeSolution = CreateFakeSolution(testMethodName);
-            _fakeExercismCommandLineInterface.Configure(fakeSolution);
+            
+            // TODO: store solution in analysis directory
+            // TODO: analyze solution
+            // TODO: read analysis output
 
-            var response = await RequestAnalysis(fakeSolution);
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadAsAsync<AnalysisResult>();
+            throw new NotImplementedException();
         }
 
         private FakeSolution CreateFakeSolution(string testMethodName) =>
             new FakeSolution(TestMethodNameToImplementationFile(testMethodName), _fakeExercise, SolutionCategory);
-
-        private async Task<HttpResponseMessage> RequestAnalysis(FakeSolution fakeSolution)
-        {
-            var fakeSolutionUrl = $"/api/analyze/{fakeSolution.Id}";
-            return await _httpClient.GetAsync(fakeSolutionUrl);
-        }
 
         private static string TestMethodNameToImplementationFile(string testMethodName) =>
             testMethodName

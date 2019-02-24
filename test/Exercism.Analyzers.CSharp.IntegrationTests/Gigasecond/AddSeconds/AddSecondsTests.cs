@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Gigasecond.AddSeconds
 {
     public class AddSecondsTests : SolutionAnalysisTests
     {
-        public AddSecondsTests(WebApplicationFactory<Startup> factory) : base(factory, FakeExercise.Gigasecond)
+        public AddSecondsTests() : base(FakeExercise.Gigasecond)
         {
         }
 

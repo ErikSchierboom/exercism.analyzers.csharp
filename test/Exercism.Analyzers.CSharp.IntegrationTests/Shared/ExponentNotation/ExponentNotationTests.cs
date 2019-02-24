@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Shared.ExponentNotation
 {
     public class ExponentNotationTests : SolutionAnalysisTests
     {
-        public ExponentNotationTests(WebApplicationFactory<Startup> factory) : base(factory, FakeExercise.Shared)
+        public ExponentNotationTests() : base(FakeExercise.Shared)
         {
         }
 

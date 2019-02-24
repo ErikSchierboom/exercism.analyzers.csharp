@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Exercism.Analyzers.CSharp.Analysis.Analyzers;
 using Exercism.Analyzers.CSharp.Analysis.Solutions;
 
 namespace Exercism.Analyzers.CSharp.Analysis

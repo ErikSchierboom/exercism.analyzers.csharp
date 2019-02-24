@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Shared.Compilation
 {
     public class CompilationTests : SolutionAnalysisTests
     {
-        public CompilationTests(WebApplicationFactory<Startup> factory) : base(factory, FakeExercise.Shared)
+        public CompilationTests() : base(FakeExercise.Shared)
         {
         }
 
