@@ -1,12 +1,11 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
+namespace Exercism.Analyzers.CSharp.CommandLine
 {
-    public static class ExercismCommandLineInterface
+    internal static class ExercismCommandLineInterface
     {   
         public static async Task<DirectoryInfo> Download(string id)
         {

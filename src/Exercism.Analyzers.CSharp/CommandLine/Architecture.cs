@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
+namespace Exercism.Analyzers.CSharp.CommandLine
 {
     internal static class Architecture
     {

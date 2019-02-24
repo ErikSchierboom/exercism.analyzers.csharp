@@ -1,4 +1,4 @@
-namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
+namespace Exercism.Analyzers.CSharp.CommandLine
 {
     public readonly struct CommandLineInterfaceResult
     {

@@ -1,6 +1,6 @@
 using System.IO;
 using System.Threading.Tasks;
-using Exercism.Analyzers.CSharp.Analysis.CommandLine;
+using Exercism.Analyzers.CSharp.CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

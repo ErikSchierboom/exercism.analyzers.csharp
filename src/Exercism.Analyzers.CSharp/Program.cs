@@ -4,9 +4,12 @@ namespace Exercism.Analyzers.CSharp
 {
     public static class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main()
         {
             Logging.Configure();
+            
+            // TODO: use command-line parsing library
+            // TODO: analyze solution
         }
     }
 }
