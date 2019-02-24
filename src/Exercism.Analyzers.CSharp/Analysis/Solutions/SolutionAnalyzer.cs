@@ -12,9 +12,9 @@ using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 {
-    public class SolutionAnalyzer
+    public static class SolutionAnalyzer
     {
-        public async Task<AnalyzedSolution> Analyze(CompiledSolution compiledSolution)
+        public static async Task<AnalyzedSolution> Analyze(CompiledSolution compiledSolution)
         {
             var analyzedSolution = await CreateAnalyzedSolution(compiledSolution);
 
@@ -24,7 +24,7 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
             return analyzedSolution;
         }
 
-        private async Task<AnalyzedSolution> CreateAnalyzedSolution(CompiledSolution compiledSolution)
+        private static async Task<AnalyzedSolution> CreateAnalyzedSolution(CompiledSolution compiledSolution)
         {
             if (HasCompilationErrors(compiledSolution))
                 return CreateAnalyzedSolutionForCompilationErrors(compiledSolution);
@@ -50,7 +50,7 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
         private static AnalyzedSolution CreateAnalyzedSolutionForFailingTests(CompiledSolution compiledSolution) =>
             AnalyzedSolution.CreateRequiresChange(compiledSolution.Solution, "The solution does not pass all tests.");
 
-        private async Task<AnalyzedSolution> CreateAnalyzedSolutionForCorrectSolution(CompiledSolution compiledSolution)
+        private static async Task<AnalyzedSolution> CreateAnalyzedSolutionForCorrectSolution(CompiledSolution compiledSolution)
         {
             var diagnostics = await GetDiagnostics(compiledSolution);
             var diagnosticsBySeverity = diagnostics.ToLookup(diagnostic => diagnostic.Severity);
@@ -74,7 +74,7 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
             return AnalyzedSolution.CreateRequiresMentoring(compiledSolution.Solution, comments);
         }
 
-        private async Task<ImmutableArray<Diagnostic>> GetDiagnostics(CompiledSolution compiledSolution)
+        private static async Task<ImmutableArray<Diagnostic>> GetDiagnostics(CompiledSolution compiledSolution)
         {
             var analyzers = AnalyzerFactory.Create(compiledSolution.Solution);
 
@@ -85,7 +85,7 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
             return await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
         }
 
-        private async Task<bool> CanBeApproved(CompiledSolution compiledSolution)
+        private static async Task<bool> CanBeApproved(CompiledSolution compiledSolution)
         {
             Log.Information("Checking if solution {ID} can be automatically approved",
                 compiledSolution.Solution.Id);

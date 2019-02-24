@@ -4,9 +4,9 @@ using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 {
-    public class SolutionCompiler
+    public static class SolutionCompiler
     {
-        public async Task<CompiledSolution> Compile(LoadedSolution loadedSolution)
+        public static async Task<CompiledSolution> Compile(LoadedSolution loadedSolution)
         {
             Log.Information("Compiling solution {ID}",
                 loadedSolution.Solution.Id, loadedSolution.Solution.Id);

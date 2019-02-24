@@ -8,14 +8,9 @@ using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 {
-    public class SolutionDownloader
+    public static class SolutionDownloader
     {
-        private readonly ExercismCommandLineInterface _exercismCommandLineInterface;
-        
-        public SolutionDownloader(ExercismCommandLineInterface exercismCommandLineInterface) =>
-            _exercismCommandLineInterface = exercismCommandLineInterface;
-
-        public async Task<DownloadedSolution> Download(string id)
+        public static async Task<DownloadedSolution> Download(string id)
         {
             Log.Information("Downloading solution {ID}", id);
             
@@ -30,8 +25,8 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
             return new DownloadedSolution(solution, projectFile);
         }
         
-        private async Task<DirectoryInfo> DownloadToDirectory(string id) =>
-            await _exercismCommandLineInterface.Download(id);
+        private static async Task<DirectoryInfo> DownloadToDirectory(string id) =>
+            await ExercismCommandLineInterface.Download(id);
 
         private static async Task<Solution> GetSolution(DirectoryInfo solutionDirectory)
         {

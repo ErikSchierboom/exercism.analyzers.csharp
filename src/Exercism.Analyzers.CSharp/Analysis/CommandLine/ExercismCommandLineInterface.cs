@@ -6,19 +6,15 @@ using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
 {
-    public class ExercismCommandLineInterface : CommandLineInterface
-    {
-        public ExercismCommandLineInterface(string fileName) : base(fileName)
-        {
-        }
-        
-        public virtual async Task<DirectoryInfo> Download(string id)
+    public static class ExercismCommandLineInterface
+    {   
+        public static async Task<DirectoryInfo> Download(string id)
         {
             var arguments = GetArguments(id);
 
             Log.Information("Executing exercism CLI command for solution {ID}: {Command}", id, arguments);
             
-            var output = await Run(arguments);
+            var output = await CommandLineInterface.Run(GetFileName(), arguments);
 
             Log.Information("Executed exercism CLI command for solution {ID}", id);
             

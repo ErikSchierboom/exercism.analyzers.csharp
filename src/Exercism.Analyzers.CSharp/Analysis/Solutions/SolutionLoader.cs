@@ -4,9 +4,9 @@ using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 {
-    public class SolutionLoader
+    public static class SolutionLoader
     {
-        public LoadedSolution Load(DownloadedSolution downloadedSolution)
+        public static LoadedSolution Load(DownloadedSolution downloadedSolution)
         {
             Log.Information("Loading solution {ID} from {ProjectFile}",
                 downloadedSolution.Solution.Id, downloadedSolution.ProjectFile.FullName);

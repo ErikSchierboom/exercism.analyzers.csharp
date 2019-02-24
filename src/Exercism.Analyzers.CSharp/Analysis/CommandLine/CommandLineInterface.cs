@@ -5,15 +5,11 @@ using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
 {
-    public abstract class CommandLineInterface
-    {
-        private readonly string _fileName;
-
-        protected CommandLineInterface(string fileName) => _fileName = fileName;
-        
-        protected async Task<CommandLineInterfaceResult> Run(string arguments)
+    internal static class CommandLineInterface
+    {   
+        public static async Task<CommandLineInterfaceResult> Run(string fileName, string arguments)
         {
-            using (var process = new Process {StartInfo = CreateStartInfo(arguments)})
+            using (var process = new Process {StartInfo = CreateStartInfo(fileName, arguments)})
             {
                 Log.Information("Executing CLI command '{File}' with arguments '{Arguments}'",
                     process.StartInfo.FileName, process.StartInfo.Arguments);
@@ -36,10 +32,10 @@ namespace Exercism.Analyzers.CSharp.Analysis.CommandLine
             }
         }
         
-        private ProcessStartInfo CreateStartInfo(string arguments) =>
+        private static ProcessStartInfo CreateStartInfo(string fileName, string arguments) =>
             new ProcessStartInfo
             {
-                FileName = _fileName,
+                FileName = fileName,
                 Arguments = arguments,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
