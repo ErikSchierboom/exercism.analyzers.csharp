@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.CommandLine;
@@ -9,23 +10,27 @@ namespace Exercism.Analyzers.CSharp.Analysis.Solutions
 {
     public static class SolutionDownloader
     {
-        public static async Task<DownloadedSolution> Download(string id)
-        {
-            Log.Information("Downloading solution {ID}", id);
-            
-            var solutionDirectory = await DownloadToDirectory(id);
-            
-            Log.Information("Downloaded solution {ID} to {SolutionDirectory}", 
-                id, solutionDirectory.FullName);
+        public static async Task<DownloadedSolution> Download(string argument)
+        {   
+            var solutionDirectory = await GetSolutionDirectory(argument);
             
             var solution = await GetSolution(solutionDirectory);
             var projectFile = GetProjectFile(solution, solutionDirectory);
             
             return new DownloadedSolution(solution, projectFile);
         }
-        
-        private static async Task<DirectoryInfo> DownloadToDirectory(string id) =>
-            await ExercismCommandLineInterface.Download(id);
+
+        private static async Task<DirectoryInfo> GetSolutionDirectory(string argument)
+        {
+            if (Guid.TryParse(argument, out var id))
+            {
+                Log.Information("Analyzing solution with ID {ID}.", id);
+                return await ExercismCommandLineInterface.Download(id);
+            }
+
+            Log.Information("Analyzing solution directory {Directory}", argument);
+            return new DirectoryInfo(argument);
+        }
 
         private static async Task<Solution> GetSolution(DirectoryInfo solutionDirectory)
         {

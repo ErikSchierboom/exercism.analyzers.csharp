@@ -6,7 +6,7 @@ namespace Exercism.Analyzers.CSharp.Analysis
     public static class Analyzer
     {
         public static async Task<AnalysisResult> Analyze(string id)
-        {
+        {   
             var loadedSolution = await LoadSolution(id);
             var compiledSolution = await CompileSolution(loadedSolution);
             return await AnalyzeSolution(compiledSolution);
@@ -25,6 +25,6 @@ namespace Exercism.Analyzers.CSharp.Analysis
         {
             var analyzedSolution = await SolutionAnalyzer.Analyze(compiledSolution);
             return new AnalysisResult(analyzedSolution.Status, analyzedSolution.Comments);
-        }   
+        }
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
 using Exercism.Analyzers.CSharp.Analysis;
-using Exercism.Analyzers.CSharp.CommandLine;
 
 namespace Exercism.Analyzers.CSharp
 {
@@ -14,27 +10,10 @@ namespace Exercism.Analyzers.CSharp
             Logging.Configure();
 
             Parser.Default.ParseArguments<Options>(args)
-                .WithParsed(HandleParseSuccess)
-                .WithNotParsed(HandleParseErrors);
+                .WithParsed(Analyze);
         }
 
-        private static void HandleParseSuccess(Options options)
-        {
-            var directory = 
-                Guid.TryParse(options.Argument, out var id)
-                ? ExercismCommandLineInterface.Download(id)
-                
-            
-            var analysisResult = Analyze();
-            
-            // TODO handle analysis
-        }
-
-        private static AnalysisResult Analyze() => Analyzer.Analyze("").GetAwaiter().GetResult();
-
-        private static void HandleParseErrors(IEnumerable<Error> errors)
-        {
-            
-        }
+        private static void Analyze(Options options) =>
+            Analyzer.Analyze(options.Argument).GetAwaiter().GetResult();
     }
 }
