@@ -6,17 +6,17 @@ namespace Exercism.Analyzers.CSharp.CommandLine
 {
     internal static class CommandLineInterface
     {   
-        public static async Task<CommandLineInterfaceResult> Run(string fileName, string arguments)
+        public static async Task<CommandLineInterfaceResult> Run(string path, string arguments)
         {
-            using (var process = new Process {StartInfo = CreateStartInfo(fileName, arguments)})
+            using (var process = new Process {StartInfo = CreateStartInfo(path, arguments)})
             {
-                Log.Information("Executing CLI command '{File}' with arguments '{Arguments}'",
+                Log.Information("Executing CLI command '{Path}' with arguments '{Arguments}'",
                     process.StartInfo.FileName, process.StartInfo.Arguments);
                 
                 process.Start();
                 process.WaitForExit();
                 
-                Log.Information("Executed CLI command '{File}' with arguments '{Arguments}'",
+                Log.Information("Executed CLI command '{Path}' with arguments '{Arguments}'",
                     process.StartInfo.FileName, process.StartInfo.Arguments);
                 
                 var output = await process.StandardOutput.ReadToEndAsync();
