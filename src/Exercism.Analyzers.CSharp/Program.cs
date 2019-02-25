@@ -1,5 +1,4 @@
 ﻿using CommandLine;
-using Exercism.Analyzers.CSharp.Analysis;
 
 namespace Exercism.Analyzers.CSharp
 {
