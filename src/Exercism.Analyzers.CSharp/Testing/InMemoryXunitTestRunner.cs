@@ -14,7 +14,7 @@ namespace Exercism.Analyzers.CSharp.Testing
         private static readonly IMessageSink DiagnosticMessageSink = new Xunit.Sdk.NullMessageSink();
         private static readonly IMessageSink ExecutionMessageSink = new Xunit.Sdk.NullMessageSink();
 
-        public static async Task<RunSummary> RunAllTests(Microsoft.CodeAnalysis.Compilation compilation)
+        internal static async Task<RunSummary> RunAllTests(Microsoft.CodeAnalysis.Compilation compilation)
         {
             var compilationWithAllTestsEnabled = compilation.EnableAllTests();
             var assemblyInfo = GetAssemblyInfo(compilationWithAllTestsEnabled);

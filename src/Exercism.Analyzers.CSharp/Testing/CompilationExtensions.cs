@@ -7,7 +7,7 @@ namespace Exercism.Analyzers.CSharp.Testing
     {
         private static readonly RemoveSkipAttributeArgumentSyntaxRewriter RemoveSkipAttributeArgumentSyntaxRewriter = new RemoveSkipAttributeArgumentSyntaxRewriter();
         
-        public static Compilation EnableAllTests(this Compilation compilation) =>
+        internal static Compilation EnableAllTests(this Compilation compilation) =>
             compilation.Rewrite(RemoveSkipAttributeArgumentSyntaxRewriter);
     }
 }
