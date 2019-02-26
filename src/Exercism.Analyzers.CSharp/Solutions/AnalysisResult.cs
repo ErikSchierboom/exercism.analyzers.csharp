@@ -1,6 +1,4 @@
-using Exercism.Analyzers.CSharp.Solutions;
-
-namespace Exercism.Analyzers.CSharp
+namespace Exercism.Analyzers.CSharp.Solutions
 {
     public class AnalysisResult
     {

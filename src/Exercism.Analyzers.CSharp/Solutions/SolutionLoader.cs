@@ -1,4 +1,5 @@
 using Exercism.Analyzers.CSharp.Compiling;
+using Exercism.Analyzers.CSharp.Projects;
 using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Solutions
