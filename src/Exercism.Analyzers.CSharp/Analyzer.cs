@@ -5,11 +5,12 @@ namespace Exercism.Analyzers.CSharp
 {
     public static class Analyzer
     {
-        public static async Task<AnalysisResult> Analyze(string id)
-        {   
+        public static async Task Analyze(string id)
+        { 
             var loadedSolution = await LoadSolution(id);
             var compiledSolution = await CompileSolution(loadedSolution);
-            return await AnalyzeSolution(compiledSolution);
+            var analysisResult = await AnalyzeSolution(compiledSolution);
+            await WriteAnalysisResultToFile(analysisResult);
         }
 
         private static async Task<LoadedSolution> LoadSolution(string id)
@@ -25,6 +26,11 @@ namespace Exercism.Analyzers.CSharp
         {
             var analyzedSolution = await SolutionAnalyzer.Analyze(compiledSolution);
             return new AnalysisResult(analyzedSolution.Status, analyzedSolution.Comments);
+        }
+
+        private static async Task WriteAnalysisResultToFile(AnalysisResult analysisResult)
+        {
+            // TODO: write to file
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Exercism.Analyzers.CSharp
         {
             Logging.Configure();
 
-            Parser.Default.ParseArguments<Options>(args)
+            Parser.Default
+                .ParseArguments<Options>(args)
                 .WithParsed(Analyze);
         }
 

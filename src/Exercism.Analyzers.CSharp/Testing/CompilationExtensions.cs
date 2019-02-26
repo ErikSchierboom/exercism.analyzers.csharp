@@ -1,13 +1,16 @@
 using Exercism.Analyzers.CSharp.Compiling;
 using Microsoft.CodeAnalysis;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Exercism.Analyzers.CSharp.Testing
 {
     internal static class CompilationExtensions
     {
-        private static readonly RemoveSkipAttributeArgumentSyntaxRewriter RemoveSkipAttributeArgumentSyntaxRewriter = new RemoveSkipAttributeArgumentSyntaxRewriter();
+        public static Compilation EnableAllTests(this Compilation compilation) =>
+            compilation.Rewrite(new RemoveSkipAttributeFromTestsSyntaxRewriter());
         
-        internal static Compilation EnableAllTests(this Compilation compilation) =>
-            compilation.Rewrite(RemoveSkipAttributeArgumentSyntaxRewriter);
+        public static IReflectionAssemblyInfo ToAssemblyInfo(this Compilation compilation) =>
+            Reflector.Wrap(compilation.GetAssembly());
     }
 }

@@ -1,49 +1,18 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Exercism.Analyzers.CSharp.Compiling;
-using Xunit;
-using Xunit.Abstractions;
+using Microsoft.CodeAnalysis;
 using Xunit.Sdk;
 
 namespace Exercism.Analyzers.CSharp.Testing
 {
     internal static class InMemoryXunitTestRunner
     {
-        private static readonly ISourceInformationProvider SourceInformationProvider = new NullSourceInformationProvider();
-        private static readonly IMessageSink DiagnosticMessageSink = new Xunit.Sdk.NullMessageSink();
-        private static readonly IMessageSink ExecutionMessageSink = new Xunit.Sdk.NullMessageSink();
-
-        internal static async Task<RunSummary> RunAllTests(Microsoft.CodeAnalysis.Compilation compilation)
+        public static async Task<RunSummary> RunAllTests(Compilation compilation)
         {
             var compilationWithAllTestsEnabled = compilation.EnableAllTests();
-            var assemblyInfo = GetAssemblyInfo(compilationWithAllTestsEnabled);
+            var assemblyInfo = compilationWithAllTestsEnabled.ToAssemblyInfo();
 
-            using (var assemblyRunner = CreateTestAssemblyRunner(assemblyInfo))
+            using (var assemblyRunner = assemblyInfo.CreateTestAssemblyRunner())
                 return await assemblyRunner.RunAsync();
-        }
-
-        private static IReflectionAssemblyInfo GetAssemblyInfo(Microsoft.CodeAnalysis.Compilation compilation) =>
-            Reflector.Wrap(compilation.GetAssembly());
-
-        private static XunitTestAssemblyRunner CreateTestAssemblyRunner(IAssemblyInfo assemblyInfo) =>
-            new XunitTestAssemblyRunner(
-                new TestAssembly(assemblyInfo),
-                GetTestCases(assemblyInfo),
-                DiagnosticMessageSink,
-                ExecutionMessageSink,
-                TestFrameworkOptions.ForExecution());
-
-        private static IEnumerable<IXunitTestCase> GetTestCases(IAssemblyInfo assemblyInfo)
-        {
-            using (var discoverySink = new TestDiscoverySink())
-            using (var discoverer = new XunitTestFrameworkDiscoverer(assemblyInfo, SourceInformationProvider, DiagnosticMessageSink))
-            {
-                discoverer.Find(false, discoverySink, TestFrameworkOptions.ForDiscovery());
-                discoverySink.Finished.WaitOne();
-
-                return discoverySink.TestCases.Cast<IXunitTestCase>();
-            }
         }
     }
 }

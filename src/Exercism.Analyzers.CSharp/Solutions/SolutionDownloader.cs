@@ -32,7 +32,7 @@ namespace Exercism.Analyzers.CSharp.Solutions
             return new DirectoryInfo(argument);
         }
 
-        private static async Task<Solution> GetSolution(DirectoryInfo solutionDirectory)
+        private static async Task<Solution> GetSolution(FileSystemInfo solutionDirectory)
         {
             using (var textReader = GetMetadataFile(solutionDirectory).OpenText())
             using (var jsonTextReader = new JsonTextReader(textReader))
