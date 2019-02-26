@@ -4,9 +4,9 @@ using Xunit.Sdk;
 
 namespace Exercism.Analyzers.CSharp.Testing
 {
-    internal static class InMemoryXunitTestRunner
+    internal static class InMemoryTestRunner
     {
-        public static async Task<RunSummary> RunAllTests(Compilation compilation)
+        public static async Task<RunSummary> RunAll(Compilation compilation)
         {
             var compilationWithAllTestsEnabled = compilation.EnableAllTests();
             var assemblyInfo = compilationWithAllTestsEnabled.ToAssemblyInfo();

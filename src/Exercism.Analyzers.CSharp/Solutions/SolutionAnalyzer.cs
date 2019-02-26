@@ -42,7 +42,7 @@ namespace Exercism.Analyzers.CSharp.Solutions
 
         private static async Task<bool> HasFailingTests(CompiledSolution compiledSolution)
         {
-            var testRunSummary = await InMemoryXunitTestRunner.RunAllTests(compiledSolution.Compilation);
+            var testRunSummary = await InMemoryTestRunner.RunAll(compiledSolution.Compilation);
             return testRunSummary.Failed > 0;
         }
 

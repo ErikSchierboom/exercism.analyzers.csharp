@@ -8,6 +8,5 @@ namespace Exercism.Analyzers.CSharp
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
-        
     }
 }

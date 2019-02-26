@@ -8,7 +8,7 @@ namespace Exercism.Analyzers.CSharp.Testing
     internal static class CompilationExtensions
     {
         public static Compilation EnableAllTests(this Compilation compilation) =>
-            compilation.Rewrite(new RemoveSkipAttributeFromTestsSyntaxRewriter());
+            compilation.Rewrite(new RemoveSkipAttributeFromTestsRewriter());
         
         public static IReflectionAssemblyInfo ToAssemblyInfo(this Compilation compilation) =>
             Reflector.Wrap(compilation.GetAssembly());

@@ -15,7 +15,7 @@ namespace Exercism.Analyzers.CSharp.CommandLine
 
             Log.Information("Ran exercism CLI command for solution {ID}", id);
             
-            return new DirectoryInfo(output.Output.Trim());
+            return new DirectoryInfo(output.Trim());
         }
 
         private static string GetExercismCliPath() => PlatformSpecificBinary.GetPath("exercism");

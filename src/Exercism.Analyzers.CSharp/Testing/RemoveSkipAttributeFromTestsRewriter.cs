@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Exercism.Analyzers.CSharp.Testing
 {
-    internal class RemoveSkipAttributeFromTestsSyntaxRewriter : CSharpSyntaxRewriter
+    internal class RemoveSkipAttributeFromTestsRewriter : CSharpSyntaxRewriter
     {
         public override SyntaxNode VisitAttributeArgument(AttributeArgumentSyntax node) =>
             AttributeArgumentNameMatches(node) ? null : base.VisitAttributeArgument(node);
