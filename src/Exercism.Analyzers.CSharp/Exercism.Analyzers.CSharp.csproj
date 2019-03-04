@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="binaries/$(OperatingSystem)-$(Architecture)/*" CopyToOutputDirectory="PreserveNewest" />
+    <Compile Remove="Old/**" />
+    <None Include="Old/**" />
   </ItemGroup>
 
 </Project>

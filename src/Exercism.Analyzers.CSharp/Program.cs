@@ -5,11 +5,12 @@ namespace Exercism.Analyzers.CSharp
 {
     public static class Program
     {
-        public static async Task Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
             Logging.Configure();
 
-            await Analyzer.Analyze(args.First());
+            var directory = args.FirstOrDefault();
+            return await Analyzer.Analyze(directory);
         }
     }
 }
