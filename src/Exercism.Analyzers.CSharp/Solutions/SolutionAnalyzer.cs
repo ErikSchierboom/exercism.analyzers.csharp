@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.Analyzers;
 using Exercism.Analyzers.CSharp.Compiling;
-using Exercism.Analyzers.CSharp.Testing;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Serilog;
@@ -28,9 +27,6 @@ namespace Exercism.Analyzers.CSharp.Solutions
             if (HasCompilationErrors(compiledSolution))
                 return CreateAnalyzedSolutionForCompilationErrors(compiledSolution);
 
-            if (await HasFailingTests(compiledSolution))
-                return CreateAnalyzedSolutionForFailingTests(compiledSolution);
-
             return await CreateAnalyzedSolutionForCorrectSolution(compiledSolution);
         }
 
@@ -39,15 +35,6 @@ namespace Exercism.Analyzers.CSharp.Solutions
 
         private static AnalyzedSolution CreateAnalyzedSolutionForCompilationErrors(CompiledSolution compiledSolution) =>
             AnalyzedSolution.CreateRequiresChange(compiledSolution.Solution, "The solution does not compile.");
-
-        private static async Task<bool> HasFailingTests(CompiledSolution compiledSolution)
-        {
-            var testRunSummary = await InMemoryTestRunner.RunAll(compiledSolution.Compilation);
-            return testRunSummary.Failed > 0;
-        }
-
-        private static AnalyzedSolution CreateAnalyzedSolutionForFailingTests(CompiledSolution compiledSolution) =>
-            AnalyzedSolution.CreateRequiresChange(compiledSolution.Solution, "The solution does not pass all tests.");
 
         private static async Task<AnalyzedSolution> CreateAnalyzedSolutionForCorrectSolution(CompiledSolution compiledSolution)
         {
