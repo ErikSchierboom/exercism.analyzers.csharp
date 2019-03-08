@@ -1,12 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Buildalyzer;
 using Buildalyzer.Workspaces;
+using Exercism.Analyzers.CSharp.Analyzers;
 using Humanizer;
 using Microsoft.CodeAnalysis;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Exercism.Analyzers.CSharp
 {
@@ -14,10 +15,8 @@ namespace Exercism.Analyzers.CSharp
     {
         public readonly string Track;
         public readonly string Exercise;
-        public readonly string Name;
 
-        public Solution(string track, string exercise) =>
-            (Track, Exercise, Name) = (track, exercise, exercise.Dehumanize().Pascalize());
+        public Solution(string track, string exercise) => (Track, Exercise) = (track, exercise);
     }
     
     public static class Analyzer
@@ -36,7 +35,7 @@ namespace Exercism.Analyzers.CSharp
             if (solution.Track != "csharp")
                 return 1;
 
-            var projectFile = Path.Combine(directory, $"{solution.Name}.csproj");
+            var projectFile = Path.Combine(directory, $"{solution.Exercise.Dehumanize().Pascalize()}.csproj");
             
             var project = new AnalyzerManager().GetProject(projectFile);
             var workspace = project.AddToWorkspace(new AdhocWorkspace());
@@ -45,8 +44,27 @@ namespace Exercism.Analyzers.CSharp
 
             if (compilation.GetDiagnostics().Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
                 return 1;
+
+            AnalysisResult analysisResult = new AnalysisResult();
             
-            
+            switch (solution.Exercise)
+            {
+                case "gigasecond":
+                    analysisResult = GigasecondAnalyzer.Analyze(compilation);
+                    break;
+            }
+
+            var analysisPath = Path.Combine(directory, "analysis.json");
+
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver()
+                {
+                    NamingStrategy = new SnakeCaseNamingStrategy()
+                }
+            };
+
+            File.WriteAllText(analysisPath, JsonConvert.SerializeObject(analysisResult, jsonSerializerSettings));
 
             return 0;
         }
