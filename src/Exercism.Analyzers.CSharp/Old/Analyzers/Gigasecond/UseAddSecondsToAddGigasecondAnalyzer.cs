@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Gigasecond
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Gigasecond
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class UseAddSecondsToAddGigasecondAnalyzer : DiagnosticAnalyzer

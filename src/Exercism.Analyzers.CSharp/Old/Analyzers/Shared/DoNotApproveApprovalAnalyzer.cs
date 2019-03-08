@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Shared
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Shared
 {
     public class DoNotApproveApprovalAnalyzer : ApprovalAnalyzer
     {

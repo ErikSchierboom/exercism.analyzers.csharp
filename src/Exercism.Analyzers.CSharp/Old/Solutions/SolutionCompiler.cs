@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Serilog;
 
-namespace Exercism.Analyzers.CSharp.Solutions
+namespace Exercism.Analyzers.CSharp.Old.Solutions
 {
     public static class SolutionCompiler
     {

@@ -1,4 +1,4 @@
-namespace Exercism.Analyzers.CSharp.Solutions
+namespace Exercism.Analyzers.CSharp.Old.Solutions
 {
     public readonly struct Solution
     {

@@ -18,7 +18,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Old/**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Exercism.Analyzers.CSharp\Exercism.Analyzers.CSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Old" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_OutputPathItem Remove="bin\Debug\netcoreapp2.2\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AppConfigFileDestination Remove="bin\Debug\netcoreapp2.2\Exercism.Analyzers.CSharp.IntegrationTests.dll.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_DebugSymbolsOutputPath Remove="bin\Debug\netcoreapp2.2\Exercism.Analyzers.CSharp.IntegrationTests.pdb" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ApplicationManifestFinal Remove="bin\Debug\netcoreapp2.2\Native.Exercism.Analyzers.CSharp.IntegrationTests.manifest" />
   </ItemGroup>
 
 </Project>

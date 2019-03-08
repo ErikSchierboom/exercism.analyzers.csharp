@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using Exercism.Analyzers.CSharp.Solutions;
+using Exercism.Analyzers.CSharp.Old.Solutions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Gigasecond
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Gigasecond
 {
     public class GigasecondApprovalAnalyzer : ApprovalAnalyzer
     {

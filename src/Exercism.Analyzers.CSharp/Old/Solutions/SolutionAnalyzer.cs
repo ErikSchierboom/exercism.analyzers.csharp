@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using Exercism.Analyzers.CSharp.Analyzers;
-using Exercism.Analyzers.CSharp.Compiling;
+using Exercism.Analyzers.CSharp.Old.Analyzers;
+using Exercism.Analyzers.CSharp.Old.Compiling;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Serilog;
 
-namespace Exercism.Analyzers.CSharp.Solutions
+namespace Exercism.Analyzers.CSharp.Old.Solutions
 {
     public static class SolutionAnalyzer
     {

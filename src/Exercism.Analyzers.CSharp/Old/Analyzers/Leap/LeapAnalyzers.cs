@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Leap
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Leap
 {
     internal static class LeapAnalyzers
     {

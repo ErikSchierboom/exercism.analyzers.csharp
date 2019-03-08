@@ -1,7 +1,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Exercism.Analyzers.CSharp.Compiling
+namespace Exercism.Analyzers.CSharp.Old.Compiling
 {
     internal static class SyntaxTreeExtensions
     {

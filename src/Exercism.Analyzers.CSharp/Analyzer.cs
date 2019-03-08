@@ -15,8 +15,10 @@ namespace Exercism.Analyzers.CSharp
     {
         public readonly string Track;
         public readonly string Exercise;
+        public readonly string ExerciseName;
 
-        public Solution(string track, string exercise) => (Track, Exercise) = (track, exercise);
+        public Solution(string track, string exercise) =>
+            (Track, Exercise, ExerciseName) = (track, exercise, exercise.Dehumanize().Pascalize());
     }
     
     public static class Analyzer
@@ -35,7 +37,7 @@ namespace Exercism.Analyzers.CSharp
             if (solution.Track != "csharp")
                 return 1;
 
-            var projectFile = Path.Combine(directory, $"{solution.Exercise.Dehumanize().Pascalize()}.csproj");
+            var projectFile = Path.Combine(directory, $"{solution.ExerciseName}.csproj");
             
             var project = new AnalyzerManager().GetProject(projectFile);
             var workspace = project.AddToWorkspace(new AdhocWorkspace());
@@ -68,33 +70,5 @@ namespace Exercism.Analyzers.CSharp
 
             return 0;
         }
-        
-//        public static async Task Analyze(string directory)
-//        { 
-//            var loadedSolution = await LoadSolution(directory);
-//            var compiledSolution = await CompileSolution(loadedSolution);
-//            var analysisResult = await AnalyzeSolution(compiledSolution);
-//            await WriteAnalysisResultToFile(analysisResult);
-//        }
-//
-//        private static async Task<LoadedSolution> LoadSolution(string id)
-//        {
-//            var downloadedSolution = await SolutionDownloader.Download(id);
-//            return SolutionLoader.Load(downloadedSolution);
-//        }
-//
-//        private static async Task<CompiledSolution> CompileSolution(LoadedSolution loadedSolution) =>
-//            await SolutionCompiler.Compile(loadedSolution);
-//
-//        private static async Task<AnalysisResult> AnalyzeSolution(CompiledSolution compiledSolution)
-//        {
-//            var analyzedSolution = await SolutionAnalyzer.Analyze(compiledSolution);
-//            return new AnalysisResult(analyzedSolution.Status, analyzedSolution.Comments);
-//        }
-//
-//        private static async Task WriteAnalysisResultToFile(AnalysisResult analysisResult)
-//        {
-//            // TODO: write to file
-//        }
     }
 }

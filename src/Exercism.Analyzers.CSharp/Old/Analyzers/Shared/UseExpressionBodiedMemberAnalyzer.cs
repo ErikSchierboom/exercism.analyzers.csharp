@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Shared
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Shared
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class UseExpressionBodiedMemberAnalyzer : DiagnosticAnalyzer

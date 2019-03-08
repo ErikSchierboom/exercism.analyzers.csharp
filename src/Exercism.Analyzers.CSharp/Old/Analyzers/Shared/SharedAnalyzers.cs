@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Shared
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Shared
 {
     internal static class SharedAnalyzers
     {

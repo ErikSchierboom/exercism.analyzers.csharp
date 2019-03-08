@@ -1,8 +1,7 @@
-using Exercism.Analyzers.CSharp.Compiling;
-using Exercism.Analyzers.CSharp.Projects;
+using Exercism.Analyzers.CSharp.Old.Projects;
 using Serilog;
 
-namespace Exercism.Analyzers.CSharp.Solutions
+namespace Exercism.Analyzers.CSharp.Old.Solutions
 {
     public static class SolutionLoader
     {

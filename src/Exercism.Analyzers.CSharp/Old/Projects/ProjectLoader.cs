@@ -3,7 +3,7 @@ using Buildalyzer;
 using Buildalyzer.Workspaces;
 using Microsoft.CodeAnalysis;
 
-namespace Exercism.Analyzers.CSharp.Projects
+namespace Exercism.Analyzers.CSharp.Old.Projects
 {
     internal static class ProjectLoader
     {

@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Gigasecond
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Gigasecond
 {
     internal static class GigasecondAnalyzers
     {

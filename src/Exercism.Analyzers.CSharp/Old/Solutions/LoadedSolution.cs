@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace Exercism.Analyzers.CSharp.Solutions
+namespace Exercism.Analyzers.CSharp.Old.Solutions
 {
     public class LoadedSolution
     {

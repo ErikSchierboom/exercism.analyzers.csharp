@@ -1,8 +1,8 @@
 using System.Linq;
-using Exercism.Analyzers.CSharp.Solutions;
+using Exercism.Analyzers.CSharp.Old.Solutions;
 using Microsoft.CodeAnalysis;
 
-namespace Exercism.Analyzers.CSharp.Analyzers
+namespace Exercism.Analyzers.CSharp.Old.Analyzers
 {
     internal static class CompilationExtensions
     {

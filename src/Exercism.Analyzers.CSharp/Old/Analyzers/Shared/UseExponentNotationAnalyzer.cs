@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Shared
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Shared
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class UseExponentNotationAnalyzer : DiagnosticAnalyzer

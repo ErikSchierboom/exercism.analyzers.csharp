@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace Exercism.Analyzers.CSharp.Analyzers.Leap
+namespace Exercism.Analyzers.CSharp.Old.Analyzers.Leap
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class UseMinimumNumberOfChecksForLeapYearAnalyzer : DiagnosticAnalyzer

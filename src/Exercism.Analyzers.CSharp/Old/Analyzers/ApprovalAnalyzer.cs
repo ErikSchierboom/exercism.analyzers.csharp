@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Exercism.Analyzers.CSharp.Analyzers
+namespace Exercism.Analyzers.CSharp.Old.Analyzers
 {
     public abstract class ApprovalAnalyzer
     {

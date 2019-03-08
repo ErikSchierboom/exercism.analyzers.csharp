@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Exercism.Analyzers.CSharp.Solutions;
+using Exercism.Analyzers.CSharp.Old.Solutions;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
