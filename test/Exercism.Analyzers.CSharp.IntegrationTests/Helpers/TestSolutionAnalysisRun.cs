@@ -1,3 +1,4 @@
+using System;
 using Exercism.Analyzers.CSharp.Analyzers;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
@@ -12,13 +13,16 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
         public TestSolutionAnalysisRun(int returnCode)
         {
             Success = returnCode == 0;
+            Approved = false;
+            ReferToMentor = false;
+            Messages = Array.Empty<string>();
         }
 
         public TestSolutionAnalysisRun(int returnCode, AnalysisResult analysisResult)
         {
             Success = returnCode == 0;
-            Approved = analysisResult.Approve;
-            ReferToMentor = analysisResult.ReferToMentor;
+            Approved = analysisResult.Approved;
+            ReferToMentor = analysisResult.ReferredToMentor;
             Messages = analysisResult.Messages;
         }
     }

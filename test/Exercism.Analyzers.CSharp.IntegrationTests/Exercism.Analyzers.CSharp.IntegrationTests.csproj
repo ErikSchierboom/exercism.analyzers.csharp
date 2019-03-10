@@ -16,9 +16,4 @@
     <ProjectReference Include="..\..\src\Exercism.Analyzers.CSharp\Exercism.Analyzers.CSharp.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Old/**" />
-    <None Include="Old/**" />
-  </ItemGroup>
-
 </Project>

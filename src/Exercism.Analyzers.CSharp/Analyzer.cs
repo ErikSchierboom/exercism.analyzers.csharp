@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.Analyzers;
+using Serilog;
 
 namespace Exercism.Analyzers.CSharp
 {   
@@ -7,6 +8,8 @@ namespace Exercism.Analyzers.CSharp
     {
         public static async Task<int> Analyze(string directory)
         {
+            Log.Information("Analysing solution in {Directory}", directory);
+            
             var solution = SolutionReader.Read(directory);
             if (solution.Track != Tracks.CSharp)
                 return 1;

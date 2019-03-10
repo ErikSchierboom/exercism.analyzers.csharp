@@ -9,14 +9,13 @@ namespace Exercism.Analyzers.CSharp
         {
             var compilation = await SolutionCompiler.Compile(solution);
             if (compilation.HasErrors())
-                return new AnalysisResult(solution, approve: false, referToMentor: false, messages: "The code does not compile");
+                return AnalysisResult.ReferToStudent(solution, "The code does not compile");
             
             switch (solution.Exercise)
             {
-                case Exercises.Gigasecond:
-                    return await GigasecondAnalyzer.Analyze(solution, compilation);
-                default:
-                    return new AnalysisResult(solution, approve: false, referToMentor: true);
+                case Exercises.Gigasecond: return GigasecondAnalyzer.Analyze(solution, compilation);
+                case Exercises.Leap: return LeapAnalyzer.Analyze(solution, compilation);
+                default: return DefaultAnalyzer.Analyze(solution, compilation);
             }
         }
     }
