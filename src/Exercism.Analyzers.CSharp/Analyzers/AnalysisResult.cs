@@ -1,12 +1,18 @@
 namespace Exercism.Analyzers.CSharp.Analyzers
 {
-    public readonly struct AnalysisResult
+    public class AnalysisResult
     {
-        public readonly bool Approve;
-        public readonly bool ReferToMentor;
-        public readonly string[] Messages;
+        public Solution Solution { get; }
+        public bool Approve { get; }
+        public bool ReferToMentor { get; }
+        public string[] Messages { get; }
 
-        public AnalysisResult(bool approve, bool referToMentor, string[] messages) =>
-            (Approve, ReferToMentor, Messages) = (approve, referToMentor, messages);
+        public AnalysisResult(Solution solution, bool approve, bool referToMentor, params string[] messages)
+        {
+            Solution = solution;
+            Approve = approve;
+            ReferToMentor = referToMentor;
+            Messages = messages;
+        }
     }
 }
