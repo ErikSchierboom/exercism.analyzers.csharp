@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests

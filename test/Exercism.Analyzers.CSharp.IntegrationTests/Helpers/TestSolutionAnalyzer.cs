@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Exercism.Analyzers.CSharp.IntegrationTests
+namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 {
     public static class TestSolutionAnalyzer
     {

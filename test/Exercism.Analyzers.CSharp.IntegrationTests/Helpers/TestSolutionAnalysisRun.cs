@@ -1,6 +1,6 @@
 using Exercism.Analyzers.CSharp.Analyzers;
 
-namespace Exercism.Analyzers.CSharp.IntegrationTests
+namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 {
     public class TestSolutionAnalysisRun
     {

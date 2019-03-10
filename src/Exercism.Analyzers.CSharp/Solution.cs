@@ -2,15 +2,11 @@ namespace Exercism.Analyzers.CSharp
 {   
     public class Solution
     {   
-        public string Track { get; }
         public string Exercise { get; }
+        public string Track { get; }
         public string Directory { get; }
 
-        public Solution(string track, string exercise, string directory)
-        {
-            Track = track;
-            Exercise = exercise;
-            Directory = directory;
-        }
+        public Solution(string exercise, string track, string directory) =>
+            (Exercise, Track, Directory) = (exercise, track, directory);
     }
 }

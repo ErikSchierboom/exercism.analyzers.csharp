@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
 using Xunit;
 
 namespace Exercism.Analyzers.CSharp.IntegrationTests
@@ -8,14 +9,14 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
         [Fact]
         public async Task ReturnErrorCodeWhenSolutionIsNotCSharpSolution()
         {
-            var testSolution = new TestSolution("leap", "ruby");
+            var testSolution = new TestSolution("leap", "ruby", "error-handling");
             var analysisRun = await TestSolutionAnalyzer.Run(testSolution, string.Empty);
             
             Assert.False(analysisRun.Success);
         }
 
         [Fact]
-        public async Task DontApproveNorReferToMentorWhenCodeHasCompileErrors()
+        public async Task DontApproveOrReferToMentorWhenCodeHasCompileErrors()
         {
             const string code = @"
                 public static class Gigasecond  

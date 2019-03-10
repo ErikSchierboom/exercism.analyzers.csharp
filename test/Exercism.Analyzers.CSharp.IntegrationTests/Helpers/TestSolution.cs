@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Exercism.Analyzers.CSharp.IntegrationTests
+namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 {
     public class TestSolution : Solution
     {
@@ -15,7 +15,11 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
         {
         }
 
-        public TestSolution(string exercise, string track) : base(track, exercise, Path.Combine("solutions", exercise))
+        public TestSolution(string exercise, string track) : base(exercise, track, Path.Combine("solutions", exercise))
+        {
+        }
+
+        public TestSolution(string exercise, string track, string directory) : base(exercise, track, Path.Combine("solutions", directory))
         {
         }
 

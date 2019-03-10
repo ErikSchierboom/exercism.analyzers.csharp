@@ -15,7 +15,7 @@ namespace Exercism.Analyzers.CSharp
                 var track = jsonSolution.Value<string>("track");
                 var exercise = jsonSolution.Value<string>("exercise");
 
-                return new Solution(track, exercise, directory);
+                return new Solution(exercise, track, directory);
             }
         }
     }

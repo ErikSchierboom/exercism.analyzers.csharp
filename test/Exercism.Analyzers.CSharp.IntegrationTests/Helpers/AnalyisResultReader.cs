@@ -3,7 +3,7 @@ using Exercism.Analyzers.CSharp.Analyzers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Exercism.Analyzers.CSharp.IntegrationTests
+namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 {
     public static class AnalyisResultReader
     {
