@@ -61,11 +61,17 @@ namespace Exercism.Analyzers.CSharp.Analyzers
             return semanticModel.GetOperation(addMethod.ExpressionBody.Expression);
         }
 
-        private static string InvokedMethod(IOperation operation) =>
-            operation is IInvocationOperation invocationOperation
-                ? invocationOperation.TargetMethod.ToDisplayString()
-                : null;
-        
+        private static string InvokedMethod(IOperation operation)
+        {
+            if (operation is IInvocationOperation invocationOperation)
+                return invocationOperation.TargetMethod.ToDisplayString();
+
+            if (operation is IBinaryOperation binaryOperation)
+                return binaryOperation.OperatorMethod.ToDisplayString();
+
+            return null;
+        }
+
 //        public override void Initialize(AnalysisContext context)
 //        {
 //            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
