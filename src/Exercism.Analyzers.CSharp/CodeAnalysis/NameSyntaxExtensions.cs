@@ -1,7 +1,7 @@
 using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Exercism.Analyzers.CSharp.Old.Compiling
+namespace Exercism.Analyzers.CSharp.CodeAnalysis
 {
     internal static class NameSyntaxExtensions
     {

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Exercism.Analyzers.CSharp.Analyzers;
+using Exercism.Analyzers.CSharp.CodeAnalysis;
 
 namespace Exercism.Analyzers.CSharp
 {
@@ -8,7 +9,7 @@ namespace Exercism.Analyzers.CSharp
         public static async Task<AnalysisResult> Analyze(Solution solution)
         {
             var compilation = await SolutionCompiler.Compile(solution);
-            if (compilation.HasErrors())
+            if (CompilationExtensions.HasErrors(compilation))
                 return AnalysisResult.ReferToStudent(solution, "The code does not compile");
             
             switch (solution.Exercise)

@@ -7,7 +7,7 @@ namespace Exercism.Analyzers.CSharp.Analyzers
         public static AnalysisResult Analyze(Solution solution, Compilation compilation)
         {
             
-            compilation.
+            
             
             
             return AnalysisResult.ReferToMentor(solution);

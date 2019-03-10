@@ -2,13 +2,10 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Exercism.Analyzers.CSharp.Old.Analyzers
+namespace Exercism.Analyzers.CSharp.CodeAnalysis
 {
     internal static class SyntaxNodeExtensions
     {
-        public static bool SkipAnalysis(this SyntaxNode syntaxNode) =>
-            syntaxNode.SyntaxTree.SkipAnalysis();
-
         public static ClassDeclarationSyntax GetClassDeclaration(this SyntaxNode syntaxNode, string className) =>
             syntaxNode?
                 .DescendantNodes()

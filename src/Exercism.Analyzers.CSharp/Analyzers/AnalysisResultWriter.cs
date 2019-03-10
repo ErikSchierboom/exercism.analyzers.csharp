@@ -1,4 +1,5 @@
 using System.IO;
+using Exercism.Analyzers.CSharp.Helpers;
 using Newtonsoft.Json;
 
 namespace Exercism.Analyzers.CSharp.Analyzers

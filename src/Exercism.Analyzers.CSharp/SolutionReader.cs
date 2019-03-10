@@ -11,7 +11,7 @@ namespace Exercism.Analyzers.CSharp
             using (var fileReader = File.OpenText(Path.Combine(directory, ".solution.json")))
             using (var jsonReader = new JsonTextReader(fileReader))
             {
-                var jsonSolution = JObject.ReadFrom(jsonReader);
+                var jsonSolution = JToken.ReadFrom(jsonReader);
                 var track = jsonSolution.Value<string>("track");
                 var exercise = jsonSolution.Value<string>("exercise");
 
