@@ -40,13 +40,13 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
         }
 
         private void CreateProjectFile() =>
-            CreateFile(this.ProjectFile(), ProjectFileContents);
+            CreateFile(this.ProjectFilePath(), ProjectFileContents);
 
         private void CreateImplementationFile(string code) =>
-            CreateFile(this.ImplementationFile(), code);
+            CreateFile(this.ImplementationFilePath(), code);
 
         private void CreateSolutionFile() =>
-            CreateFile(this.SolutionFile(),$"{{\"track\":\"{Track}\",\"exercise\":\"{Exercise}\"}}");
+            CreateFile(this.SolutionFilePath(),$"{{\"track\":\"{Track}\",\"exercise\":\"{Exercise}\"}}");
 
         private static void CreateFile(string path, string contents) =>
             File.WriteAllText(path, contents);

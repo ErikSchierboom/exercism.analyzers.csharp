@@ -88,7 +88,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
         }
 
         [Fact]
-        public async Task ReferToMentorWithMessageWhenUsingAdd()
+        public async Task ReferToStudentWithMessageWhenUsingAdd()
         {
             const string code = @"
                 using System;
@@ -102,12 +102,12 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
             
             Assert.True(analysisRun.Success);
             Assert.False(analysisRun.Approved);
-            Assert.True(analysisRun.ReferToMentor);
+            Assert.False(analysisRun.ReferToMentor);
             Assert.Single(analysisRun.Messages, "Use AddSeconds");
         }
 
         [Fact]
-        public async Task ReferToMentorWithMessageWhenUsingPlusOperator()
+        public async Task ReferToStudentWithMessageWhenUsingPlusOperator()
         {
             const string code = @"
                 using System;
@@ -121,7 +121,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
             
             Assert.True(analysisRun.Success);
             Assert.False(analysisRun.Approved);
-            Assert.True(analysisRun.ReferToMentor);
+            Assert.False(analysisRun.ReferToMentor);
             Assert.Single(analysisRun.Messages, "Use AddSeconds");
         }
     }

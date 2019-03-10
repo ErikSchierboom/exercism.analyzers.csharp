@@ -9,7 +9,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
     {
         public static AnalysisResult Read(Solution solution)
         {
-            using (var fileReader = File.OpenText(solution.AnalysisFile()))
+            using (var fileReader = File.OpenText(solution.AnalysisFilePath()))
             using (var jsonReader = new JsonTextReader(fileReader))
             {
                 var jsonAnalysisResult = JToken.ReadFrom(jsonReader);

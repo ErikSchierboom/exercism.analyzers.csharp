@@ -1,4 +1,5 @@
 using Microsoft.CodeAnalysis;
+using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analyzers
 {
@@ -6,8 +7,8 @@ namespace Exercism.Analyzers.CSharp.Analyzers
     {
         public static AnalysisResult Analyze(Solution solution, Compilation compilation)
         {
-            
-            
+            Log.Information("Analysing {Exercise} using {Analyzer}", 
+                solution.Exercise, nameof(LeapAnalyzer));
             
             
             return AnalysisResult.ReferToMentor(solution);

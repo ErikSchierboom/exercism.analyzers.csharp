@@ -1,4 +1,7 @@
+using Exercism.Analyzers.CSharp.CodeAnalysis;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Operations;
 using Serilog;
 
 namespace Exercism.Analyzers.CSharp.Analyzers
@@ -8,53 +11,60 @@ namespace Exercism.Analyzers.CSharp.Analyzers
         public static AnalysisResult Analyze(Solution solution, Compilation compilation)
         {
             Log.Information("Analysing {Exercise} using {Analyzer}", 
-                solution.Exercise, nameof(DefaultAnalyzer));
+                solution.Exercise, nameof(GigasecondAnalyzer));
+
+            var tree = compilation.GetImplementationSyntaxTree(solution);
+            if (tree == null)
+                return AnalysisResult.ReferToMentor(solution);
+
+            var root = tree.GetRoot();
+            var addMethod = root
+                .GetClassDeclaration(solution.ExerciseFriendlyName())
+                .GetMethodDeclaration("Add");
+            
+            if (addMethod == null)
+                return AnalysisResult.ReferToMentor(solution);
+
+            var operation =
+                GetOperationFromBody(compilation, tree, addMethod) ??
+                GetOperationFromExpressionBody(compilation, tree, addMethod);
+            
+            if (InvokedMethod(operation) == "System.DateTime.AddSeconds(double)")
+                return AnalysisResult.Approve(solution);
+                    
+            if (InvokedMethod(operation) == "System.DateTime.Add(System.TimeSpan)")
+                return AnalysisResult.ReferToStudent(solution, "Use AddSeconds");
+
+            // invocationOperation.TargetMethod.ToDisplayString()
+            // invocationOperation.OperatorMethod.ToDisplayString()
+            if (InvokedMethod(operation) == "System.DateTime.operator +(System.DateTime, System.TimeSpan)")
+                return AnalysisResult.ReferToStudent(solution, "Use AddSeconds");
 
             return AnalysisResult.ReferToMentor(solution);
         }
-        
-//        public override async Task<bool> CanBeApproved(Compilation compilation)
-//        {
-//            var syntaxTree = compilation.GetImplementationSyntaxTree(Exercise.Gigasecond);
-//            if (syntaxTree == null)
-//                return false;
-//
-//            var root = await syntaxTree.GetRootAsync();
-//            var addMethod = root
-//                .GetClassDeclaration("Gigasecond")
-//                .GetMethodDeclaration("Add");
-//            
-//            if (addMethod == null)
-//                return false;
-//
-//            var operation =
-//                GetOperationFromBody(compilation, syntaxTree, addMethod) ??
-//                GetOperationFromExpressionBody(compilation, syntaxTree, addMethod);
-//
-//            return OperationInvokesDateTimeAddSecondsMethod(operation);
-//        }
-//
-//        private static IOperation GetOperationFromBody(Compilation compilation, SyntaxTree syntaxTree,
-//            MethodDeclarationSyntax addMethod)
-//        {
-//            if (addMethod.Body == null || addMethod.Body.Statements.Count != 1)
-//                return null;
-//            
-//            var semanticModel = compilation.GetSemanticModel(syntaxTree);
-//            var returnOperation = (IReturnOperation)semanticModel.GetOperation(addMethod.Body.Statements[0]);
-//            return returnOperation.ReturnedValue;
-//        }
-//
-//        private static IOperation GetOperationFromExpressionBody(Compilation compilation, SyntaxTree syntaxTree,
-//            MethodDeclarationSyntax addMethod)
-//        {
-//            var semanticModel = compilation.GetSemanticModel(syntaxTree);
-//            return semanticModel.GetOperation(addMethod.ExpressionBody.Expression);
-//        }
-//
-//        private static bool OperationInvokesDateTimeAddSecondsMethod(IOperation operation) =>
-//            operation is IInvocationOperation invocationOperation &&
-//            invocationOperation.TargetMethod.ToDisplayString() == "System.DateTime.AddSeconds(double)";
+
+        private static IOperation GetOperationFromBody(Compilation compilation, SyntaxTree syntaxTree,
+            MethodDeclarationSyntax addMethod)
+        {
+            if (addMethod.Body == null || addMethod.Body.Statements.Count != 1)
+                return null;
+
+            var semanticModel = compilation.GetSemanticModel(syntaxTree);
+            var returnOperation = (IReturnOperation)semanticModel.GetOperation(addMethod.Body.Statements[0]);
+            return returnOperation.ReturnedValue;
+        }
+
+        private static IOperation GetOperationFromExpressionBody(Compilation compilation, SyntaxTree syntaxTree,
+            MethodDeclarationSyntax addMethod)
+        {
+            var semanticModel = compilation.GetSemanticModel(syntaxTree);
+            return semanticModel.GetOperation(addMethod.ExpressionBody.Expression);
+        }
+
+        private static string InvokedMethod(IOperation operation) =>
+            operation is IInvocationOperation invocationOperation
+                ? invocationOperation.TargetMethod.ToDisplayString()
+                : null;
         
 //        public override void Initialize(AnalysisContext context)
 //        {

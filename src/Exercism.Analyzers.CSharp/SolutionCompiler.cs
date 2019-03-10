@@ -9,7 +9,7 @@ namespace Exercism.Analyzers.CSharp
     {
         public static async Task<Compilation> Compile(Solution solution)
         {
-            var project = new AnalyzerManager().GetProject(solution.ProjectFile());
+            var project = new AnalyzerManager().GetProject(solution.ProjectFilePath());
             var workspace = project.AddToWorkspace(new AdhocWorkspace());
 
             return await workspace.GetCompilationAsync();

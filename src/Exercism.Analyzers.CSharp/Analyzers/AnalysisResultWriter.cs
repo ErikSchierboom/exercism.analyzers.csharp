@@ -8,7 +8,7 @@ namespace Exercism.Analyzers.CSharp.Analyzers
     {
         public static void Write(AnalysisResult analysisResult)
         {
-            using (var fileWriter = File.CreateText(analysisResult.Solution.AnalysisFile()))
+            using (var fileWriter = File.CreateText(analysisResult.Solution.AnalysisFilePath()))
             using (var jsonTextWriter = new JsonTextWriter(fileWriter))
             {
                 jsonTextWriter.WriteStartObject();
