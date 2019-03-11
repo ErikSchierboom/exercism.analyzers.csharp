@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Exercism.Analyzers.CSharp.Helpers
+namespace Exercism.Analyzers.CSharp
 {
     internal static class JsonExtensions
     {

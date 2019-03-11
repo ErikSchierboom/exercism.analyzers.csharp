@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using Exercism.Analyzers.CSharp.Analyzers;
 using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
 using Xunit;
 
@@ -10,7 +8,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
         private const string Exercise = "leap";
 
         [Fact]
-        public async Task ApproveWhenUsingMinimumNumberOfChecks()
+        public void ApproveWhenUsingMinimumNumberOfChecks()
         {
             const string code = @"
                 public static class Leap
@@ -19,15 +17,16 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
                         year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
                 }";
 
-            var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
+            var analysisRun = TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.Equal(SolutionStatus.Approve, analysisRun.Status);
+            Assert.True(analysisRun.Approved);
+            Assert.False(analysisRun.ReferToMentor);
             Assert.Empty(analysisRun.Messages);
         }
 
         [Fact]
-        public async Task ApproveWhenUsingUnneededParentheses()
+        public void ApproveWhenUsingUnneededParentheses()
         {
             const string code = @"
                 public static class Leap
@@ -36,15 +35,16 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
                         (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
                 }";
 
-            var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
+            var analysisRun = TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.Equal(SolutionStatus.Approve, analysisRun.Status);
+            Assert.True(analysisRun.Approved);
+            Assert.False(analysisRun.ReferToMentor);
             Assert.Empty(analysisRun.Messages);
         }
 
         [Fact]
-        public async Task ApproveWithMessageWhenUsingMethodWithBlockBody()
+        public void ApproveWithMessageWhenUsingMethodWithBlockBody()
         {
             const string code = @"
                 public static class Leap
@@ -55,15 +55,16 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
                     }
                 }";
 
-            var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
+            var analysisRun = TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.Equal(SolutionStatus.Approve, analysisRun.Status);
+            Assert.True(analysisRun.Approved);
+            Assert.False(analysisRun.ReferToMentor);
             Assert.Single(analysisRun.Messages, "You could write the method an an expression-bodied member");
         }
 
         [Fact]
-        public async Task ReferToMentorWithMessageWhenUsingTooManyChecks()
+        public void ReferToMentorWithMessageWhenUsingTooManyChecks()
         {
             const string code = @"
                 public static class Leap
@@ -72,10 +73,11 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
                         year % 4 == 0 && year % 100 != 0 || year % 100 == 0 && year % 400 == 0;
                 }";
 
-            var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
+            var analysisRun = TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.Equal(SolutionStatus.ReferToMentor, analysisRun.Status);
+            Assert.False(analysisRun.Approved);
+            Assert.True(analysisRun.ReferToMentor);
             Assert.Single(analysisRun.Messages, "Use minimum number of checks");
         }
     }

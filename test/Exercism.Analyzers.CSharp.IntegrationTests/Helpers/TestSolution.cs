@@ -8,7 +8,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
         {
         }
 
-        public TestSolution(string exercise, string track) : base(exercise, track, Path.Combine("solutions", exercise))
+        public TestSolution(string exercise, string track) : base(exercise, track, Path.Combine("solutions", track, exercise))
         {
         }
 
@@ -21,17 +21,17 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 
         private void CreateDirectory()
         {
-            if (System.IO.Directory.Exists(Directory))
-                System.IO.Directory.Delete(Directory, recursive: true);
+            if (Directory.Exists(Paths.Directory))
+                Directory.Delete(Paths.Directory, recursive: true);
 
-            System.IO.Directory.CreateDirectory(Directory);
+            Directory.CreateDirectory(Paths.Directory);
         }
 
         private void CreateImplementationFile(string code) =>
-            CreateFile(this.ImplementationFilePath(), code);
+            CreateFile(Paths.ImplementationFilePath, code);
 
         private void CreateSolutionFile() =>
-            CreateFile(this.SolutionFilePath(),$"{{\"track\":\"{Track}\",\"exercise\":\"{Exercise}\"}}");
+            CreateFile(Paths.SolutionFilePath,$"{{\"track\":\"{Track}\",\"exercise\":\"{Exercise}\"}}");
 
         private static void CreateFile(string path, string contents) =>
             File.WriteAllText(path, contents);

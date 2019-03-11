@@ -1,14 +1,13 @@
 using System.IO;
-using Exercism.Analyzers.CSharp.Helpers;
 using Newtonsoft.Json;
 
-namespace Exercism.Analyzers.CSharp.Analyzers
+namespace Exercism.Analyzers.CSharp
 {
     public static class AnalyzedSolutionWriter
     {
         public static void Write(AnalyzedSolution analyzedSolution)
         {
-            using (var fileWriter = File.CreateText(analyzedSolution.Solution.AnalysisFilePath()))
+            using (var fileWriter = File.CreateText(analyzedSolution.Solution.Paths.AnalysisFilePath))
             using (var jsonTextWriter = new JsonTextWriter(fileWriter))
             {
                 jsonTextWriter.WriteStartObject();

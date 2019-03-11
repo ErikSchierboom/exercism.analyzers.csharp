@@ -5,30 +5,30 @@ namespace Exercism.Analyzers.CSharp.Analyzers
 {
     public static class GigasecondAnalyzer
     {
-        public static AnalyzedSolution Analyze(Solution solution)
+        public static AnalyzedSolution Analyze(ImplementedSolution implementation)
         {
             Log.Information("Analysing {Exercise} using {Analyzer}",
-                solution.Exercise, nameof(GigasecondAnalyzer));
+                implementation.Solution.Exercise, nameof(GigasecondAnalyzer));
 
-            if (solution.ImplementationIsEquivalentTo(AddSecondsWithScientificNotation))
-                return new AnalyzedSolution(solution, SolutionStatus.Approve);
+            if (implementation.IsEquivalentTo(AddSecondsWithScientificNotation))
+                return new AnalyzedSolution(implementation.Solution, SolutionStatus.Approve);
 
-            if (solution.ImplementationIsEquivalentTo(AddSecondsWithMathPow))
-                return new AnalyzedSolution(solution, SolutionStatus.Approve, "Use 1e9 instead of Math.Pow(10, 9)");
+            if (implementation.IsEquivalentTo(AddSecondsWithMathPow))
+                return new AnalyzedSolution(implementation.Solution, SolutionStatus.Approve, "Use 1e9 instead of Math.Pow(10, 9)");
 
-            if (solution.ImplementationIsEquivalentTo(AddSecondsWithDigitsWithoutSeparator))
-                return new AnalyzedSolution(solution, SolutionStatus.Approve, "Use 1e9 or 1_000_000 instead of 1000000");
+            if (implementation.IsEquivalentTo(AddSecondsWithDigitsWithoutSeparator))
+                return new AnalyzedSolution(implementation.Solution, SolutionStatus.Approve, "Use 1e9 or 1_000_000 instead of 1000000");
 
-            if (solution.ImplementationIsEquivalentTo(AddSecondsWithScientificNotationInBlockBody))
-                return new AnalyzedSolution(solution, SolutionStatus.Approve, "You could write the method an an expression-bodied member");
+            if (implementation.IsEquivalentTo(AddSecondsWithScientificNotationInBlockBody))
+                return new AnalyzedSolution(implementation.Solution, SolutionStatus.Approve, "You could write the method an an expression-bodied member");
 
-            if (solution.ImplementationIsEquivalentTo(Add))
-                return new AnalyzedSolution(solution, SolutionStatus.ReferToMentor, "Use AddSeconds");
+            if (implementation.IsEquivalentTo(Add))
+                return new AnalyzedSolution(implementation.Solution, SolutionStatus.ReferToMentor, "Use AddSeconds");
 
-            if (solution.ImplementationIsEquivalentTo(PlusOperator))
-                return new AnalyzedSolution(solution, SolutionStatus.ReferToMentor, "Use AddSeconds");
+            if (implementation.IsEquivalentTo(PlusOperator))
+                return new AnalyzedSolution(implementation.Solution, SolutionStatus.ReferToMentor, "Use AddSeconds");
 
-            return new AnalyzedSolution(solution, SolutionStatus.ReferToMentor);
+            return new AnalyzedSolution(implementation.Solution, SolutionStatus.ReferToMentor);
         }
     }
 }
