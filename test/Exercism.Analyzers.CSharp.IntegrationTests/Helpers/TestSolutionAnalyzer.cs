@@ -15,7 +15,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
             if (returnCode > 0)
                 return new TestSolutionAnalysisRun(returnCode);
 
-            var analysisResult = AnalyisResultReader.Read(testSolution);
+            var analysisResult = AnalyzedSolutionReader.Read(testSolution);
             return new TestSolutionAnalysisRun(returnCode, analysisResult);
         }
     }

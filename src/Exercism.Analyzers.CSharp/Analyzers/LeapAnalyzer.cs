@@ -1,21 +1,36 @@
-using Microsoft.CodeAnalysis;
 using Serilog;
+using static Exercism.Analyzers.CSharp.Analyzers.LeapSolutions;
 
 namespace Exercism.Analyzers.CSharp.Analyzers
 {
     public static class LeapAnalyzer
     {
-        public static AnalysisResult Analyze(Solution solution, Compilation compilation)
+        public static AnalyzedSolution Analyze(Solution solution)
         {
             Log.Information("Analysing {Exercise} using {Analyzer}", 
                 solution.Exercise, nameof(LeapAnalyzer));
-            
-            
-            return AnalysisResult.ReferToMentor(solution);
+
+            if (solution.ImplementationIsEquivalentTo(MinimumNumberOfChecks))
+                return new AnalyzedSolution(solution, SolutionStatus.Approve);
+
+            if (solution.ImplementationIsEquivalentTo(UnneededParentheses))
+                return new AnalyzedSolution(solution, SolutionStatus.Approve);
+
+            if (solution.ImplementationIsEquivalentTo(MethodWithBlockBody))
+                return new AnalyzedSolution(solution, SolutionStatus.Approve, "You could write the method an an expression-bodied member");
+
+            if (solution.UsesTooManyChecks())
+                return new AnalyzedSolution(solution, SolutionStatus.ReferToMentor, "Use minimum number of checks");
+
+            return new AnalyzedSolution(solution, SolutionStatus.ReferToMentor);
         }
-        
-        
-//        private const int MinimalNumberOfChecks = 3;
+
+        private static bool UsesTooManyChecks(this Solution solution)
+        {
+            // TODO: add checks
+            
+            return false;
+//            private const int MinimalNumberOfChecks = 3;
 //        private const string LeapClassIdentifier = "Leap";
 //        private const string IsLeapYearMethodIdentifier = "IsLeapYear";
 //        private const string YearParameterIdentifier = "year";
@@ -66,5 +81,6 @@ namespace Exercism.Analyzers.CSharp.Analyzers
 //        private static bool ExpressionUsesYearParameter(ExpressionSyntax expression) =>
 //            expression is IdentifierNameSyntax nameSyntax &&
 //            nameSyntax.Identifier.Text == YearParameterIdentifier;
+        }
     }
 }

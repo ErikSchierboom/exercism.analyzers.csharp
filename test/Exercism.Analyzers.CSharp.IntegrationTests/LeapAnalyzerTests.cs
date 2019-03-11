@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Exercism.Analyzers.CSharp.Analyzers;
 using Exercism.Analyzers.CSharp.IntegrationTests.Helpers;
 using Xunit;
 
@@ -21,8 +22,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
             var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.True(analysisRun.Approved);
-            Assert.False(analysisRun.ReferToMentor);
+            Assert.Equal(SolutionStatus.Approve, analysisRun.Status);
             Assert.Empty(analysisRun.Messages);
         }
 
@@ -39,8 +39,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
             var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.True(analysisRun.Approved);
-            Assert.False(analysisRun.ReferToMentor);
+            Assert.Equal(SolutionStatus.Approve, analysisRun.Status);
             Assert.Empty(analysisRun.Messages);
         }
 
@@ -59,9 +58,8 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
             var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.True(analysisRun.Approved);
-            Assert.False(analysisRun.ReferToMentor);
-            Assert.Single(analysisRun.Messages, "Use 1e9 instead of Math.Pow(10, 9)");
+            Assert.Equal(SolutionStatus.Approve, analysisRun.Status);
+            Assert.Single(analysisRun.Messages, "You could write the method an an expression-bodied member");
         }
 
         [Fact]
@@ -77,8 +75,7 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests
             var analysisRun = await TestSolutionAnalyzer.Run(Exercise, code);
             
             Assert.True(analysisRun.Success);
-            Assert.False(analysisRun.Approved);
-            Assert.True(analysisRun.ReferToMentor);
+            Assert.Equal(SolutionStatus.ReferToMentor, analysisRun.Status);
             Assert.Single(analysisRun.Messages, "Use minimum number of checks");
         }
     }

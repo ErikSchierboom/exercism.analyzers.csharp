@@ -18,7 +18,7 @@ namespace Exercism.Analyzers.CSharp
             if (analysisResult == null)
                 return 0;
 
-            AnalysisResultWriter.Write(analysisResult);
+            AnalyzedSolutionWriter.Write(analysisResult);
             return 0;
         }
     }

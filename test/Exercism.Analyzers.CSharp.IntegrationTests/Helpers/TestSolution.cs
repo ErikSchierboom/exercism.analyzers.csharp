@@ -4,13 +4,6 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 {
     public class TestSolution : Solution
     {
-        private const string ProjectFileContents = @"
-<Project Sdk=""Microsoft.NET.Sdk"">
-    <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
-    </PropertyGroup>
-</Project >";
-
         public TestSolution(string exercise) : this(exercise, "csharp")
         {
         }
@@ -19,14 +12,9 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
         {
         }
 
-        public TestSolution(string exercise, string track, string directory) : base(exercise, track, Path.Combine("solutions", directory))
-        {
-        }
-
         public void CreateFiles(string code)
         {
             CreateDirectory();
-            CreateProjectFile();
             CreateImplementationFile(code);
             CreateSolutionFile();
         }
@@ -38,9 +26,6 @@ namespace Exercism.Analyzers.CSharp.IntegrationTests.Helpers
 
             System.IO.Directory.CreateDirectory(Directory);
         }
-
-        private void CreateProjectFile() =>
-            CreateFile(this.ProjectFilePath(), ProjectFileContents);
 
         private void CreateImplementationFile(string code) =>
             CreateFile(this.ImplementationFilePath(), code);
