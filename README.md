@@ -1,2 +1,3 @@
-# exercism.analyzers.csharp
-A proof-of-concept for a tool that can analyze C# exercise solutions.
+### DEPRECATED
+
+This repository has been moved to https://github.com/exercism/csharp-analyzer
